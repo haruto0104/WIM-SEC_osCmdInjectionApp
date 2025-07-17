@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OSコマンドインジェクション体験アプリ</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <h1>OSコマンドインジェクション体験アプリ</h1>
+        <p class="warning-note">
+            <span class="highlight">【注意】これはOSコマンドインジェクションのシミュレーションです。実際のOSには一切影響を与えません。</span>
+            <br>ファイル検索機能に脆弱性があり、不適切な入力とずさんな権限設定がもたらす危険性を体験するためのものです。
+        </p>
+
+        <div class="search-section">
+            <label for="search-input">ファイル検索:</label>
+            <input type="text" id="search-input" placeholder="例: document.txt , & cd /home/user_B/">
+            <button id="search-button">検索</button>
+        </div>
+
+        <div id="status-area" class="status-bar" style="display: none;">
+            <span class="close-status-button">&times;</span>
+            <div id="status-message-content"></div>
+        </div>
+
+        <div class="file-manager">
+            <h2>ファイル一覧</h2>
+            <p>現在のディレクトリ: <span id="current-directory-display">/home/user_A/</span></p>
+            <div id="file-list-container" class="file-list">
+                </div>
+        </div>
+        <h3>検索バーに入力して試す:</h3>
+        <div class="scenario-buttons">
+            <button data-input="document.txt">通常の検索: document.txt</button>
+            <button data-input="& cd /home/user_B/">危険な操作1: user_Bディレクトリへ移動</button>
+            <button data-input="& rm /home/user_B/ -R">危険な操作2: user_Bディレクトリを全削除</button>
+            <button data-input="& cat /etc/passwd">危険な操作3: パスワードファイル閲覧</button>
+            <button data-input='& echo "<h1>Hacked by Attacker!</h1>" > /var/www/html/index.html'>危険な操作4: Webサイト改ざん</button>
+            <button data-input="& chown user_B config.ini">危険な操作5: config.ini の所有者をuser_Bに</button>
+            <button data-input="& chmod 777 config.ini">危険な操作6: config.ini のパーミッションを777に</button>
+            <button id="reset-button" class="reset-button">状態を初期化</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+    <footer>
+        <div>©WIM-CC 2022-2025 <a href="https://w-haruto.wim-cc.com/works/license/" target="_blank">利用規約</a>
+        <div>OSコマンドインジェクション体験アプリ（2025.07.14）</div>
+    </footer>
+</body>
+</html>

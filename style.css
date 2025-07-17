@@ -1,0 +1,364 @@
+html, body {
+    height: 100%; /* htmlとbodyの高さがビューポートに合わせる */
+    margin: 0;    /* デフォルトのマージンをリセット */
+    padding: 0;   /* デフォルトのパディングをリセット */
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f0f2f5;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 100vh;
+}
+
+.container {
+    /* flex-grow: 1; を追加 */
+    flex-grow: 1; /* フッター以外の残りのスペースを全て占めるようにする */
+    max-width: 900px; /* 適切な最大幅を設定 */
+    width: 100%; /* 親要素の幅いっぱいに広がる */
+    margin: 20px auto; /* 上下に余白、左右中央寄せ */
+    padding: 30px 40px;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    box-sizing: border-box; /* パディングを幅に含める */
+}
+
+h1 {
+    color: #0056b3;
+    text-align: center;
+    margin-bottom: 25px;
+    font-size: 2.2em;
+}
+
+h2 {
+    color: #007bff;
+    border-bottom: 2px solid #e9ecef;
+    padding-bottom: 10px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+}
+
+h3 {
+    color: #495057;
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.warning-note {
+    background-color: #ffe0b2; /* Light orange */
+    border: 1px solid #ffb74d; /* Orange */
+    color: #e65100; /* Darker orange */
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-size: 0.95em;
+    line-height: 1.5;
+}
+
+.warning-note .highlight {
+    font-weight: bold;
+    color: #d84315; /* Even darker orange/red */
+}
+
+.search-section {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 25px;
+    align-items: center;
+}
+
+.search-section label {
+    font-weight: bold;
+    color: #555;
+    white-space: nowrap;
+}
+
+#search-input {
+    flex-grow: 1;
+    padding: 12px 15px;
+    border: 1px solid #ced4da;
+    border-radius: 6px;
+    font-size: 1em;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#search-input:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+    outline: none;
+}
+
+button {
+    background-color: #007bff;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+    white-space: nowrap;
+}
+
+button:hover {
+    background-color: #0056b3;
+    transform: translateY(-1px);
+}
+
+button:active {
+    background-color: #004085;
+    transform: translateY(0);
+}
+
+.status-bar {
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 25px;
+    font-weight: bold;
+    font-size: 0.95em;
+    line-height: 1.4;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    position: relative; /* 閉じるボタンの配置のため */
+}
+
+.status-bar.info {
+    background-color: #e7f3ff;
+    border: 1px solid #b3d7ff;
+    color: #004085;
+}
+
+.status-bar.success {
+    background-color: #d4edda;
+    border: 1px solid #c3e6cb;
+    color: #155724;
+}
+
+.status-bar.warning {
+    background-color: #fff3cd;
+    border: 1px solid #ffeeba;
+    color: #856404;
+}
+
+.status-bar.error {
+    background-color: #f8d7da;
+    border: 1px solid #f5c6cb;
+    color: #721c24;
+}
+
+.close-status-button {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.2s ease;
+}
+
+.close-status-button:hover {
+    color: #333;
+}
+
+#status-message-content {
+    padding-right: 25px;
+}
+
+.file-manager {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 20px;
+    background-color: #fdfdfd;
+}
+
+#current-directory-display {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.file-list {
+    margin-top: 15px;
+    max-height: 400px; /* 高さを少し増やす */
+    overflow-y: auto;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    padding: 10px;
+    background-color: #fff;
+}
+
+.file-item {
+    display: flex;
+    flex-wrap: wrap; /* 内容展開のために折り返しを許可 */
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 12px;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 0.95em;
+    position: relative; /* オーバーレイのための基準 */
+}
+
+.file-item:last-child {
+    border-bottom: none;
+}
+
+.file-item span.file-info {
+    flex-grow: 1;
+    color: #343a40;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer; /* クリック可能であることを示す */
+    padding: 5px 0; /* クリックエリアを少し広げる */
+}
+
+.file-item span.file-info:hover {
+    color: #007bff;
+    text-decoration: underline;
+}
+
+.file-item .file-permissions {
+    font-family: 'Courier New', monospace;
+    color: #6c757d;
+    min-width: 80px;
+}
+
+.file-item .file-owner {
+    font-weight: bold;
+    color: #007bff;
+    min-width: 60px;
+}
+
+.file-item .file-actions { /* ボタンをまとめるための新しいクラス */
+    display: flex;
+    gap: 5px;
+}
+
+.file-item button {
+    padding: 8px 15px;
+    font-size: 0.85em;
+    border-radius: 4px;
+}
+
+.file-item .download-button {
+    background-color: #28a745;
+}
+
+.file-item .download-button:hover {
+    background-color: #218838;
+}
+
+.file-item .delete-button {
+    background-color: #dc3545;
+}
+
+.file-item .delete-button:hover {
+    background-color: #c82333;
+}
+
+.no-files {
+    text-align: center;
+    color: #6c757d;
+    padding: 20px;
+    font-style: italic;
+}
+
+.scenario-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px dashed #e0e0e0;
+}
+
+.scenario-buttons button {
+    background-color: #6c757d;
+    color: white;
+    padding: 10px 18px;
+    font-size: 0.9em;
+}
+
+.scenario-buttons button:hover {
+    background-color: #5a6268;
+}
+
+.reset-button {
+    background-color: #f0ad4e;
+}
+
+.reset-button:hover {
+    background-color: #ec971f;
+}
+
+/* 新しいファイル内容表示エリアのスタイル */
+.file-content-overlay {
+    width: 100%;
+    background-color: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    margin-top: 10px; /* ファイルアイテム本体との間隔 */
+    padding: 15px;
+    box-sizing: border-box;
+    display: none; /* 初期状態では非表示 */
+    overflow: hidden; /* 高さをアニメーションさせるため */
+    transition: max-height 0.3s ease-out, opacity 0.3s ease-out;
+    max-height: 0;
+    opacity: 0;
+}
+
+.file-content-overlay.active {
+    display: block; /* JavaScriptで表示 */
+    max-height: 300px; /* 展開時の最大高さ */
+    opacity: 1;
+}
+
+.file-content-overlay pre {
+    white-space: pre-wrap;
+    word-break: break-all;
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+    color: #333;
+    margin: 0;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
+    max-height: 250px; /* テキスト内容の最大高さ */
+    overflow-y: auto;
+}
+
+.file-content-overlay img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+    border: 1px solid #ddd;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+.file-content-overlay p {
+    color: #666;
+    text-align: center;
+    font-style: italic;
+}
+
+footer {
+    width: 100%; /* 親要素 (body) の幅いっぱいに広がる */
+    text-align: center;
+    padding: 20px 0;
+    margin-top: auto; /* Flexboxでフッターを最下部に押し出す */
+    background-color: #e9ecef;
+    color: #6c757d;
+    font-size: 0.85em;
+    border-top: 1px solid #dee2e6;
+    /* フッターにposition: fixed; や float: left/right; などがあれば削除してください */
+}
+
+footer a{
+    color: #6c757d;
+}
